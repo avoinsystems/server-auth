@@ -5,7 +5,7 @@
 {
     "name": "Password Security",
     "summary": "Allow admin to set password security requirements.",
-    "version": "13.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "LasLabs, "
     "Kaushal Prajapati, "
     "Tecnativa, "
@@ -24,5 +24,5 @@
         "security/res_users_pass_history.xml",
     ],
     "demo": ["demo/res_users.xml"],
-    "installable": True,
+    "installable": False,
 }

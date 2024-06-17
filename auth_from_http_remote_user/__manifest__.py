@@ -3,7 +3,7 @@
 
 {
     "name": "Authenticate via HTTP Remote User",
-    "version": "13.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Tools",
     "development_status": "Production/Stable",
     "author": "Acsone SA/NV,Odoo Community Association (OCA)",
@@ -11,4 +11,5 @@
     "website": "https://github.com/OCA/server-auth",
     "depends": ["base", "web", "base_setup"],
     "license": "AGPL-3",
+    "installable": False,
 }

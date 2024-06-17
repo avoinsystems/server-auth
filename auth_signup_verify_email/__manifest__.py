@@ -3,7 +3,7 @@
 {
     "name": "Verify email at signup",
     "summary": "Force uninvited users to use a good email for signup",
-    "version": "13.0.1.0.1",
+    "version": "17.0.1.0.0",
     "category": "Authentication",
     "website": "https://github.com/OCA/server-auth",
     "author": "Antiun Ingeniería S.L., "
@@ -13,5 +13,5 @@
     "depends": ["auth_signup"],
     "external_dependencies": {"python": ["lxml", "email_validator"]},
     "data": ["views/signup.xml"],
-    "installable": True,
+    "installable": False,
 }

@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "LDAP groups assignment",
-    "version": "13.0.1.0.0",
+    "version": "17.0.1.0.0",
     "website": "https://github.com/OCA/server-auth",
     "depends": ["auth_ldap"],
     "author": "Therp BV, " "Odoo Community Association (OCA)",
@@ -14,4 +14,5 @@
     "category": "Authentication",
     "data": ["views/res_company_ldap_views.xml", "security/ir.model.access.csv"],
     "external_dependencies": {"python": ["python-ldap"]},
+    "installable": False,
 }

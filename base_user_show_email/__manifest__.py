@@ -3,12 +3,12 @@
 
 {
     "name": "Base User Show Email",
-    "version": "13.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Tools",
     "website": "https://github.com/OCA/server-auth",
     "author": "Camptocamp, " "Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "installable": True,
+    "installable": False,
     "application": False,
     "summary": "Untangle user login and email",
     "depends": ["base", "web"],
