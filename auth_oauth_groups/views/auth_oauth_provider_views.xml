@@ -12,7 +12,7 @@
                         name="refresh_groups"
                         type="object"
                         string="Refresh Groups"
-                        attrs="{'invisible': [('provider_service', '=', False)]}"/>
+                        invisible="not provider_service"/>
                 </header>
             </xpath>
 
@@ -23,7 +23,7 @@
             <xpath expr="//sheet" position="inside">
                 <group name="group_mappings"
                        string="Active Directory Groups"
-                       attrs="{'invisible': [('provider_service', '=', False)]}">
+                       invisible="not provider_service">
                     <field name="force_groups"/>
                     <field name="new_groups_handling"/>
                     <field name="group_mapping_ids">

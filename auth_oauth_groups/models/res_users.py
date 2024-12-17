@@ -11,11 +11,11 @@ class ResUsers(models.Model):
     _inherit = "res.users"
 
     @classmethod
-    def _login(cls, db, login, password):
-        user_id = super()._login(db, login, password)
+    def _login(cls, db, login, password, user_agent_env):
+        user_id = super()._login(db, login, password, user_agent_env)
         if not user_id:
             return user_id
-        with registry(db).cursor() as cr:
+        with cls.pool.cursor() as cr:
             env = api.Environment(cr, SUPERUSER_ID, {})
             user = env["res.users"].browse(user_id)
             if user.oauth_provider_id.provider_service:
