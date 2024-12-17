@@ -11,7 +11,7 @@
                     name="import_users"
                     type="object"
                     string="Import Users"
-                    attrs="{'invisible': [('provider_service', '=', False)]}"/>
+                    invisible="not provider_service"/>
             </xpath>
         </field>
     </record>
