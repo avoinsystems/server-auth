@@ -54,26 +54,30 @@ class ImportUsers(TransientModel):
                 raise UserError(f"Graph API call failed with status {response.status_code}: {response.text}")
 
             json_res = response.json()
-            page_results = [{"oauth_uid": val["id"],
-                             "oauth_provider_id": self.group_id.provider_id.id,
-                             "name": val["displayName"],
-                             "login": val["userPrincipalName"],
-                             "email": val["mail"]}
-                            for val in json_res["value"]]
+            page_results = [{
+                "oauth_uid": val["id"],
+                "oauth_provider_id": self.group_id.provider_id.id,
+                "name": val["displayName"],
+                "login": val["userPrincipalName"],
+                "email": val["mail"],
+            } for val in json_res["value"] if val['@odata.type'] == '#microsoft.graph.user']
             next_link = json_res["@odata.nextLink"] if "@odata.nextLink" in json_res else False
             return page_results + recursive_get_graph(next_link)
 
         url = f"https://graph.microsoft.com/v1.0/groups/{self.group_id.group_identifier}/members?$count=true"
         users = recursive_get_graph(url)
 
-        existing_logins = [val["login"] for val in self.env["res.users"].search_read([], ["login"])]
-
-        # Look for users that don't exist in Odoo
-        new_user_vals = [
-            user for user in users
-            if user["login"] not in existing_logins
-        ]
-        new_users = self.env["res.users"].create(new_user_vals)
+        new_users = self.env["res.users"]
+        for user_vals in users:
+            existing_user = self.env["res.users"].search([
+                "|",
+                ("login", "=", user_vals["login"]),
+                "&",
+                ("oauth_provider_id", "=", user_vals["oauth_provider_id"]),
+                ("oauth_uid", "=", user_vals["oauth_uid"]),
+            ])
+            if not existing_user:
+                new_users |= self.env["res.users"].create(user_vals)
 
         if new_users:
             _logger.info(f"User import complete. "

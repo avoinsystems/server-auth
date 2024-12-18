@@ -40,8 +40,9 @@ class ResUsers(models.Model):
         users_directory_groups = self.get_directory_groups()
 
         # Get the groups from the group mapping and the user's existing groups
-        new_odoo_group_mappings = provider.group_mapping_ids \
-            .filtered(lambda m: m.directory_group_id.group_identifier in users_directory_groups)
+        new_odoo_group_mappings = provider.group_mapping_ids.filtered(
+            lambda m: m.directory_group_id.group_identifier in users_directory_groups
+        )
         new_odoo_groups = new_odoo_group_mappings.group_id
 
         # Check if Odoo was able to find matches for all group IDs
